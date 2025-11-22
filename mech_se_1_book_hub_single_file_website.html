@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="gu">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MechSE1Books — Diploma Mechanical SE1 PDFs</title>
+  <style>
+    :root{--bg:#f7f8fb;--card:#fff;--accent:#0b69ff;--muted:#666}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans",sans-serif;background:var(--bg);color:#111}
+    header{background:linear-gradient(90deg,#0b69ff22,#0b69ff11);padding:20px}
+    .container{max-width:1000px;margin:18px auto;padding:0 16px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:52px;height:52px;border-radius:10px;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
+    h1{font-size:20px;margin:0}
+    p.lead{margin:6px 0 0;color:var(--muted)}
+
+    .search-row{display:flex;gap:12px;margin:18px 0}
+    .search-row input[type=text]{flex:1;padding:12px;border-radius:10px;border:1px solid #e2e6ef;outline:none;font-size:15px}
+    .search-row select, .search-row button{padding:12px;border-radius:10px;border:1px solid #e2e6ef;background:#fff}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-top:16px}
+    .card{background:var(--card);padding:14px;border-radius:12px;box-shadow:0 6px 18px rgba(19,24,45,0.06);display:flex;flex-direction:column;gap:8px}
+    .card h3{margin:0;font-size:16px}
+    .meta{font-size:13px;color:var(--muted)}
+    .tags{display:flex;gap:8px;flex-wrap:wrap}
+    .tag{font-size:12px;padding:6px 8px;border-radius:999px;border:1px solid #eef2ff}
+    .card .actions{margin-top:auto;display:flex;gap:8px}
+    .btn{display:inline-block;padding:10px 12px;border-radius:10px;text-decoration:none;font-weight:600;border:1px solid transparent}
+    .btn-primary{background:var(--accent);color:#fff}
+    .btn-ghost{background:#fff;border:1px solid #ddd;color:#111}
+
+    footer{margin:30px 0 60px;color:var(--muted);text-align:center}
+    .categories{display:flex;gap:8px;overflow:auto;padding:8px 0}
+    .category{background:#fff;border-radius:999px;padding:8px 12px;border:1px solid #e9eefb;white-space:nowrap}
+
+    @media (max-width:520px){.brand h1{font-size:16px}.search-row{flex-direction:column}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <div class="logo">MS</div>
+        <div>
+          <h1>MechSE1Books</h1>
+          <p class="lead">Diploma Mechanical — Semester 1: PDF પુસ્તકો ર૦ફરી ડાઉનલોડ</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+      <div style="flex:1;min-width:260px">
+        <div class="search-row">
+          <input id="q" type="text" placeholder="વસ্তু (subject), લેખક, અથવા filename લખો..." oninput="filterCards()" />
+          <select id="cat" onchange="filterCards()">
+            <option value="">બધા subject</option>
+            <option value="maths">Mathematics / Calculus</option>
+            <option value="applied">Applied Science</option>
+            <option value="drawing">Engineering Drawing</option>
+            <option value="workshop">Workshop Practice</option>
+            <option value="materials">Material Science</option>
+          </select>
+          <button onclick="resetFilters()">Reset</button>
+        </div>
+
+        <div class="categories" aria-hidden>
+          <div class="category">Mathematics</div>
+          <div class="category">Engineering Drawing</div>
+          <div class="category">Applied Science</div>
+          <div class="category">Workshop Practice</div>
+          <div class="category">Material Science</div>
+        </div>
+      </div>
+
+      <div style="min-width:180px;text-align:right">
+        <div style="font-size:13px;color:var(--muted)">ઝટપટ ઍક્સેસ:</div>
+        <div style="margin-top:8px"><a class="btn btn-ghost" href="#upload" onclick="scrollToUpload()">પુસ્તક ઉમેરો</a></div>
+      </div>
+    </div>
+
+    <section id="books" class="grid" aria-live="polite">
+      <!-- Example cards - replace hrefs with real PDF URLs -->
+      <article class="card" data-cat="maths" data-title="Engineering Mathematics - Volume 1">
+        <h3>Engineering Mathematics - Volume 1</h3>
+        <div class="meta">Subject: Mathematics · Size: 3.4 MB · Format: PDF</div>
+        <div class="tags"><span class="tag">GTU</span><span class="tag">Semester 1</span></div>
+        <div class="actions">
+          <a class="btn btn-primary" href="#" onclick="downloadAlert(event)">Free Download</a>
+          <a class="btn btn-ghost" href="#">View PDF</a>
+        </div>
+      </article>
+
+      <article class="card" data-cat="drawing" data-title="Engineering Drawing Basics">
+        <h3>Engineering Drawing Basics</h3>
+        <div class="meta">Subject: Engineering Drawing · Size: 2.1 MB</div>
+        <div class="tags"><span class="tag">Notes</span><span class="tag">Diagrams</span></div>
+        <div class="actions">
+          <a class="btn btn-primary" href="#" onclick="downloadAlert(event)">Free Download</a>
+          <a class="btn btn-ghost" href="#">View PDF</a>
+        </div>
+      </article>
+
+      <article class="card" data-cat="workshop" data-title="Workshop Practice - Lab Manual">
+        <h3>Workshop Practice - Lab Manual</h3>
+        <div class="meta">Workshop Practice · Size: 1.8 MB</div>
+        <div class="tags"><span class="tag">Practical</span></div>
+        <div class="actions">
+          <a class="btn btn-primary" href="#" onclick="downloadAlert(event)">Free Download</a>
+          <a class="btn btn-ghost" href="#">View PDF</a>
+        </div>
+      </article>
+
+      <!-- Add more cards here or load dynamically -->
+    </section>
+
+    <section id="upload" style="margin-top:28px;padding:16px;background:#fff;border-radius:12px;box-shadow:0 6px 18px rgba(19,24,45,0.04)">
+      <h2 style="margin:0 0 8px">પુસ્તક ઉમેરવા માટે</h2>
+      <p class="meta">તમારી પાસે જો PDF હોય તો અહીંની ફોર્મ મારફતે પ્રોમૉટ કરો — અથવા webmaster@example.com પર મોકલો.</p>
+      <form onsubmit="event.preventDefault();alert('આ ગ્રેડી મૉક ફોર્મ છે — પ્રકાશન માટે PDF link અપડેટ કરો.');">
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <input required placeholder="પુસ્તકનું નામ" style="flex:1;padding:10px;border-radius:8px;border:1px solid #e6eaf6" />
+          <input required placeholder="PDF URL (https://...)" style="flex:1;padding:10px;border-radius:8px;border:1px solid #e6eaf6" />
+          <button class="btn btn-primary" type="submit">જમા કરો</button>
+        </div>
+      </form>
+      <p class="meta" style="margin-top:8px">ધ્યાન: કૉપીરાઇટેડ સામગ્રી અપલોડ કરતા પહેલા અધિકારો ચેક કરો. શૈક્ષણિક નોટ્સ અને OER વધુ સુરક્ષિત છે.</p>
+    </section>
+
+    <footer>
+      <small>© <span id="year"></span> MechSE1Books — Free educational PDFs. Site built for quick access. Replace sample links with real PDF URLs.</small>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById('year').textContent=new Date().getFullYear();
+
+    function filterCards(){
+      const q = document.getElementById('q').value.trim().toLowerCase();
+      const cat = document.getElementById('cat').value;
+      const cards = document.querySelectorAll('#books .card');
+      cards.forEach(c=>{
+        const title = c.dataset.title.toLowerCase();
+        const ccat = c.dataset.cat;
+        const matchesQ = q === '' || title.includes(q) || c.innerText.toLowerCase().includes(q);
+        const matchesCat = cat === '' || ccat === cat;
+        c.style.display = (matchesQ && matchesCat) ? 'flex' : 'none';
+      });
+    }
+    function resetFilters(){document.getElementById('q').value='';document.getElementById('cat').value='';filterCards()}
+    function downloadAlert(e){e.preventDefault();alert('તમારી સાઇટમાં સંપૂર્ણ PDF link મૂકો. આ બટન હવે ડેમો છે.');}
+    function scrollToUpload(){document.getElementById('upload').scrollIntoView({behavior:'smooth'})}
+  </script>
+</body>
+</html>
